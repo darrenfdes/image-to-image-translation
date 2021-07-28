@@ -67,7 +67,7 @@ G_AB = GeneratorResNet(input_shape, n_residual_blocks)
 # if cuda:
 #     G_AB = G_AB.cuda()
 
-G_AB.load_state_dict(torch.load("static/models/saved_models/G_AB.pth"))
+G_AB.load_state_dict(torch.load("static/models/saved_models/G_AB.pth",'cpu'))
 G_AB.eval()
 
 # G_BA = GeneratorResNet(input_shape, n_residual_blocks)
@@ -144,7 +144,7 @@ def flip():
     if mode == "vertical":
         # rename all A to B other than G_BA
         G_BA = GeneratorResNet(input_shape, n_residual_blocks)
-        G_BA.load_state_dict(torch.load("static/models/saved_models/G_BA.pth"))
+        G_BA.load_state_dict(torch.load("static/models/saved_models/G_BA.pth",'cpu'))
         G_BA.eval()
         real_B = image_loader(data_transforms, destination).type(Tensor)
         fake_A = G_BA(real_B)
